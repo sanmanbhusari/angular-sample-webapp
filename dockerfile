@@ -13,7 +13,7 @@ RUN npm install
 RUN npm install -g @angular/cli@8.1.0
 
 # add app
-COPY webapp/. .
+COPY . .
 
 # generate build
 RUN ng build --prod --aot --output-path=dist
