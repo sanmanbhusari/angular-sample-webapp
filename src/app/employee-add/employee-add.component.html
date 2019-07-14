@@ -1,0 +1,54 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade"
+       *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div class="button-row">
+    <a mat-flat-button color="primary" [routerLink]="['/employees']"><mat-icon>list</mat-icon></a>
+  </div>
+  <mat-card class="example-card">
+    <form [formGroup]="employeeForm" (ngSubmit)="onFormSubmit(employeeForm.value)">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="First Name" formControlName="firstName">
+        <mat-error>
+          <span *ngIf="!employeeForm.get('firstName').valid && employeeForm.get('firstName').touched">Please enter First Name</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Last Name" formControlName="lastName">
+        <mat-error>
+          <span *ngIf="!employeeForm.get('lastName').valid && employeeForm.get('lastName').touched">Please enter Last Name</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput [matDatepicker]="picker1" placeholder="Date Of Birth" formControlName="dateOfBirth">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+        <mat-error>
+          <span *ngIf="!employeeForm.get('dateOfBirth').valid && employeeForm.get('dateOfBirth').touched">Please enter Date Of Birth</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput [matDatepicker]="picker2" placeholder="Date Of Joining" formControlName="dateOfJoining">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+        <mat-error>
+          <span *ngIf="!employeeForm.get('dateOfJoining').valid && employeeForm.get('dateOfJoining').touched">Please enter Date Of Joining</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-select matInput placeholder="Employee Manager" formControlName="managerId">
+          <mat-option *ngFor="let employee of data" [value]="employee.employeeId">
+            {{ employee.firstName + ' ' + employee.lastName}}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          <span *ngIf="!employeeForm.get('managerId').valid && employeeForm.get('managerId').touched">Please select Employee Manager</span>
+        </mat-error>
+      </mat-form-field>
+      <div class="button-row">
+        <button type="submit" [disabled]="!employeeForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
+      </div>
+    </form>
+  </mat-card>
+</div>
